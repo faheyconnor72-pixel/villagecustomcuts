@@ -352,15 +352,10 @@
       <div class="book-step" id="step-2">
         <div class="step-label">Step 2 of 4 — Choose Your Barber</div>
         <div class="barber-opts">
-          <div class="barber-opt" data-barber="Marcus D." onclick="selectBarber(this)">
-            <div class="barber-opt-av"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80&fit=crop&face" alt="Marcus" /></div>
-            <div class="barber-opt-name">Marcus D.</div>
-            <div class="barber-opt-title">Master Barber</div>
-          </div>
-          <div class="barber-opt" data-barber="Julio R." onclick="selectBarber(this)">
-            <div class="barber-opt-av"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80&fit=crop&face" alt="Julio" /></div>
-            <div class="barber-opt-name">Julio R.</div>
-            <div class="barber-opt-title">Senior Barber</div>
+          <div class="barber-opt" data-barber="Justin" onclick="selectBarber(this)">
+            <div class="barber-opt-av"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80&fit=crop&face" alt="Justin" /></div>
+            <div class="barber-opt-name">Justin</div>
+            <div class="barber-opt-title">Master Barber · Owner</div>
           </div>
           <div class="barber-opt" data-barber="No Preference" onclick="selectBarber(this)">
             <div class="barber-opt-av" style="display:flex;align-items:center;justify-content:center;font-size:1.2rem;">✦</div>
@@ -524,25 +519,22 @@
     <h2 class="s-h2 rv d1">Meet Your Barbers</h2>
     <div class="barbers-grid">
       <div class="barber-card rv d1">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&fit=crop" alt="Marcus D." />
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&fit=crop" alt="Justin" />
         <div class="barber-info">
-          <div class="barber-name">Marcus D.</div>
+          <div class="barber-name">Justin</div>
           <div class="barber-title">Master Barber · Owner</div>
-          <div class="barber-spec">15+ years behind the chair. Specialist in fades, tapers, and classic cuts. Born and raised in the Hudson Valley.</div>
+          <div class="barber-spec">Years of experience behind the chair at Village Custom Cuts. Known for taking the time to understand your facial structure and recommend the perfect cut and color for you.</div>
         </div>
       </div>
-      <div class="barber-card rv d2">
-        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&fit=crop" alt="Julio R." />
-        <div class="barber-info">
-          <div class="barber-name">Julio R.</div>
-          <div class="barber-title">Senior Barber</div>
-          <div class="barber-spec">Known for surgical fades and detailed beard work. 8 years of experience, certified in hot towel technique.</div>
-        </div>
-      </div>
-      <div class="barber-card rv d3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:440px;border-style:dashed;border-color:rgba(201,168,76,.28);">
+      <div class="barber-card rv d2" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:440px;border-style:dashed;border-color:rgba(201,168,76,.28);">
         <div style="font-size:2.5rem;margin-bottom:1rem;color:rgba(201,168,76,.3);">+</div>
         <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:.4rem;">Spot Available</div>
         <div style="font-size:.82rem;color:var(--m2);">Talented barbers — reach out to join our team.</div>
+      </div>
+      <div class="barber-card rv d3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:440px;border-style:dashed;border-color:rgba(201,168,76,.28);">
+        <div style="font-size:2.5rem;margin-bottom:1rem;color:rgba(201,168,76,.3);">✦</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:.4rem;">Walk-Ins Welcome</div>
+        <div style="font-size:.82rem;color:var(--m2);max-width:160px;">No appointment needed — come on in any time we're open.</div>
       </div>
     </div>
   </div>
@@ -606,22 +598,22 @@
     <h2 class="s-h2 rv d1">Hours &amp; Location</h2>
     <div class="hours-grid">
       <div class="hours-table rv d2">
-        <div class="h-row"><span class="h-day">Monday</span><span class="h-time">9:00 AM – 7:00 PM</span></div>
-        <div class="h-row"><span class="h-day">Tuesday</span><span class="h-time">9:00 AM – 7:00 PM</span></div>
-        <div class="h-row"><span class="h-day">Wednesday</span><span class="h-time">9:00 AM – 7:00 PM</span></div>
-        <div class="h-row"><span class="h-day">Thursday</span><span class="h-time">9:00 AM – 7:00 PM</span></div>
-        <div class="h-row"><span class="h-day">Friday</span><span class="h-time">9:00 AM – 8:00 PM</span></div>
-        <div class="h-row"><span class="h-day">Saturday</span><span class="h-time">8:00 AM – 6:00 PM</span></div>
+        <div class="h-row closed"><span class="h-day">Monday</span><span class="h-time">Closed</span></div>
+        <div class="h-row"><span class="h-day">Tuesday</span><span class="h-time">9:00 AM – 4:00 PM</span></div>
+        <div class="h-row"><span class="h-day">Wednesday</span><span class="h-time">9:00 AM – 8:00 PM</span></div>
+        <div class="h-row"><span class="h-day">Thursday</span><span class="h-time">9:00 AM – 6:00 PM</span></div>
+        <div class="h-row"><span class="h-day">Friday</span><span class="h-time">9:00 AM – 6:00 PM</span></div>
+        <div class="h-row"><span class="h-day">Saturday</span><span class="h-time">9:00 AM – 5:00 PM</span></div>
         <div class="h-row closed"><span class="h-day">Sunday</span><span class="h-time">Closed</span></div>
       </div>
       <div class="hours-contact rv d3">
-        <a href="tel:+19146660000" class="contact-card" style="text-decoration:none;color:inherit;">
+        <a href="tel:+19148620245" class="contact-card" style="text-decoration:none;color:inherit;">
           <div class="contact-ic">📞</div>
-          <div><div class="contact-label">Phone</div><div class="contact-val">(914) 666-0000</div><div class="contact-sub">Call to book or ask questions</div></div>
+          <div><div class="contact-label">Phone</div><div class="contact-val">(914) 862-0245</div><div class="contact-sub">Call to book or ask questions</div></div>
         </a>
         <div class="contact-card">
           <div class="contact-ic">📍</div>
-          <div><div class="contact-label">Address</div><div class="contact-val">Village Custom Cuts</div><div class="contact-sub">Croton-on-Hudson, NY 10520</div></div>
+          <div><div class="contact-label">Address</div><div class="contact-val">6 Maple St</div><div class="contact-sub">Croton-on-Hudson, NY 10520</div></div>
         </div>
         <div class="contact-card" style="cursor:pointer;" onclick="openBook(event)">
           <div class="contact-ic">📅</div>
@@ -640,18 +632,18 @@
     <div class="rev-grid">
       <div class="rev-card rv d1">
         <div class="rev-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-        <p class="rev-q">"Best barbershop in Westchester, hands down. Marcus has been cutting my hair for 6 years and never misses. Always leaves clean, always leaves sharp."</p>
-        <div class="rev-author"><div class="rev-av">TM</div><div><div class="rev-name">Tom M.</div><div class="rev-meta">Croton-on-Hudson · Regular Client</div></div></div>
+        <p class="rev-q">"I have been a client of Justin's for years. He takes the time to understand facial structure to recommend the best cut and color for you. He doesn't rush through his work and makes sure you are happy."</p>
+        <div class="rev-author"><div class="rev-av">SK</div><div><div class="rev-name">Susan K.</div><div class="rev-meta">Croton-on-Hudson · Yelp Review</div></div></div>
       </div>
       <div class="rev-card rv d2">
         <div class="rev-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-        <p class="rev-q">"Brought my son for his first real haircut. Julio was so patient and great with him. The cut looked amazing. We won't go anywhere else."</p>
-        <div class="rev-author"><div class="rev-av">LG</div><div><div class="rev-name">Lisa G.</div><div class="rev-meta">Cortlandt Manor · Yelp Review</div></div></div>
+        <p class="rev-q">"Love Justin — have been a regular for a few years now and he's one of the greatest out there, always so friendly and excited to see all of his customers."</p>
+        <div class="rev-author"><div class="rev-av">SM</div><div><div class="rev-name">Scott M.</div><div class="rev-meta">Croton-on-Hudson · Yelp Review</div></div></div>
       </div>
       <div class="rev-card rv d3">
         <div class="rev-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-        <p class="rev-q">"The hot towel shave here is something else. I felt like I was in a movie. Great vibe, great barbers, great price. This place is a gem."</p>
-        <div class="rev-author"><div class="rev-av">RK</div><div><div class="rev-name">Rob K.</div><div class="rev-meta">Ossining · Google Review</div></div></div>
+        <p class="rev-q">"I cannot recommend Justin at Village Custom Cuts enough. He not only is so friendly and personable, but he also gives an amazing cut! He cuts both my husband's and my hair flawlessly every time."</p>
+        <div class="rev-author"><div class="rev-av">AF</div><div><div class="rev-name">Alanna F.</div><div class="rev-meta">Croton-on-Hudson · Yelp Review</div></div></div>
       </div>
     </div>
   </div>
@@ -742,7 +734,7 @@ function selectBarber(el){
 /* CALENDAR */
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DAYS=['Su','Mo','Tu','We','Th','Fr','Sa'];
-const CLOSED_DAYS=[0]; // Sunday
+const CLOSED_DAYS=[0,1]; // Sunday + Monday
 
 function buildCal(){
   const today=new Date();today.setHours(0,0,0,0);
