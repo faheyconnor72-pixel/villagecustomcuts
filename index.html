@@ -142,19 +142,14 @@
     .gal-item:not(.gal-main) img{height:235px;}
 
     /* ABOUT */
-    #about{padding:5rem 3rem;border-top:1px solid var(--bd);}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;}
-    .about-img-wrap{position:relative;}
-    .about-img{width:100%;border-radius:14px;object-fit:cover;height:340px;display:block;filter:saturate(.65);}
-    .about-badge{position:absolute;bottom:2rem;left:2rem;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border:1px solid var(--gold);border-radius:12px;padding:1.5rem;min-width:180px;}
-    .about-badge-n{font-family:'Syne',sans-serif;font-size:2.25rem;font-weight:800;color:var(--gold);line-height:1;}
-    .about-badge-l{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m2);margin-top:.3rem;}
-    .about-text .s-h2{margin-bottom:1.25rem;font-size:clamp(1.6rem,3vw,2.4rem);}
-    .about-p{color:var(--m1);font-size:.92rem;line-height:1.8;margin-bottom:.875rem;}
-    .about-perks{display:flex;flex-direction:column;gap:.625rem;margin-top:1.25rem;}
-    .perk{display:flex;align-items:flex-start;gap:.875rem;}
-    .perk-ic{width:34px;height:34px;border-radius:8px;background:var(--gold3);border:1px solid rgba(60,158,101,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;}
-    .perk-text{font-size:.9rem;color:var(--m1);line-height:1.6;padding-top:.35rem;}
+    #about{padding:3.5rem 3rem;border-top:1px solid var(--bd);}
+    .about-inner{max-width:680px;}
+    .about-text .s-h2{margin-bottom:1rem;font-size:clamp(1.4rem,2.5vw,2rem);}
+    .about-p{color:var(--m1);font-size:.9rem;line-height:1.75;margin-bottom:.75rem;}
+    .about-perks{display:flex;flex-direction:column;gap:.5rem;margin-top:1rem;}
+    .perk{display:flex;align-items:flex-start;gap:.75rem;}
+    .perk-ic{width:28px;height:28px;border-radius:7px;background:var(--gold3);border:1px solid rgba(60,158,101,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;}
+    .perk-text{font-size:.85rem;color:var(--m1);line-height:1.55;padding-top:.2rem;}
 
     /* HOURS */
     #hours{padding:8rem 3rem;border-top:1px solid var(--bd);}
@@ -345,8 +340,6 @@
       .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
       .gal-main{grid-row:auto;}
       .gal-main img,.gal-item:not(.gal-main) img{height:260px;}
-      .about-grid{grid-template-columns:1fr;gap:2rem;}
-      .about-img{height:260px;}
       .hours-grid{grid-template-columns:1fr;}
       .rev-grid{grid-template-columns:1fr;}
     }
@@ -689,24 +682,14 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="sec-wrap">
-    <div class="about-grid">
-      <div class="about-img-wrap rv-l">
-        <img class="about-img" src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=85&fit=crop" alt="Barbershop interior" loading="lazy" />
-        <div class="about-badge">
-          <div class="about-badge-n">10+</div>
-          <div class="about-badge-l">Years in Croton</div>
-        </div>
-      </div>
-      <div class="about-text rv-r">
-        <div class="s-label">Our Story</div>
-        <h2 class="s-h2">A Neighborhood Barbershop That Takes Pride in Every Cut.</h2>
-        <p class="about-p">Village Custom Cuts has been serving Croton-on-Hudson for over a decade. We're not a chain — we're your neighbors. Every barber here has a name you'll remember and a craft you'll feel.</p>
-        <p class="about-p">From classic tapers to tight fades and hot towel shaves, we bring precision and care to every chair, every time. Walk in anytime, or book your spot online.</p>
-        <div class="about-perks">
-          <div class="perk"><div class="perk-ic">✦</div><div class="perk-text"><strong>Precision &amp; Consistency</strong> — We remember how you like it. Same great cut, every visit.</div></div>
-          <div class="perk"><div class="perk-ic">✦</div><div class="perk-text"><strong>Premium Products</strong> — We only use top-quality clippers, razors, and grooming products.</div></div>
-          <div class="perk"><div class="perk-ic">✦</div><div class="perk-text"><strong>Walk-Ins Always Welcome</strong> — Booked or not, there's always a chair for you.</div></div>
-        </div>
+    <div class="about-inner about-text rv">
+      <div class="s-label">Our Story</div>
+      <h2 class="s-h2">A Neighborhood Barbershop That Takes Pride in Every Cut.</h2>
+      <p class="about-p">Village Custom Cuts has been serving Croton-on-Hudson for over a decade. We're not a chain — we're your neighbors. Every barber here has a name you'll remember and a craft you'll feel.</p>
+      <div class="about-perks">
+        <div class="perk"><div class="perk-ic">✦</div><div class="perk-text"><strong>Precision &amp; Consistency</strong> — Same great cut, every visit.</div></div>
+        <div class="perk"><div class="perk-ic">✦</div><div class="perk-text"><strong>Premium Products</strong> — Top-quality clippers, razors, and grooming products.</div></div>
+        <div class="perk"><div class="perk-ic">✦</div><div class="perk-text"><strong>Walk-Ins Always Welcome</strong> — Booked or not, there's always a chair for you.</div></div>
       </div>
     </div>
   </div>
@@ -993,27 +976,6 @@ document.querySelectorAll('.tilt').forEach(card=>{
 });
 
 /* COUNTER — About badge */
-function animCount(el,target,suffix){
-  let start=null;
-  const step=ts=>{
-    if(!start)start=ts;
-    const p=Math.min((ts-start)/1400,1);
-    const ease=1-Math.pow(1-p,3);
-    el.textContent=Math.ceil(ease*target)+suffix;
-    if(p<1)requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
-}
-const badgeIO=new IntersectionObserver(e=>{
-  e.forEach(x=>{
-    if(!x.isIntersecting)return;
-    const nEl=x.target.querySelector('.about-badge-n');
-    if(nEl)animCount(nEl,10,'+');
-    badgeIO.unobserve(x.target);
-  });
-},{threshold:.6});
-const badgeEl=document.querySelector('.about-badge');
-if(badgeEl)badgeIO.observe(badgeEl);
 
 /* HOURS ROWS STAGGER */
 const hoursIO=new IntersectionObserver(e=>{
