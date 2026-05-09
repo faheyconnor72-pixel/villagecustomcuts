@@ -45,22 +45,22 @@
     nav.s .n-tog span{background:var(--cream);}
 
     /* HERO — CINEMATIC */
-    #hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:#04080 5;}
+    #hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--bg);}
 
-    /* Dark base + left atmospheric glow */
+    /* Light base + left atmospheric glow */
     .hero-bg{position:absolute;inset:0;z-index:0;
       background:
-        radial-gradient(ellipse 55% 70% at 10% 55%,rgba(60,158,101,.07) 0%,transparent 65%),
-        radial-gradient(ellipse 30% 50% at 50% 100%,rgba(60,158,101,.04) 0%,transparent 70%),
-        #050a06;}
+        radial-gradient(ellipse 55% 70% at 10% 55%,rgba(42,125,79,.07) 0%,transparent 65%),
+        radial-gradient(ellipse 30% 50% at 50% 100%,rgba(42,125,79,.04) 0%,transparent 70%),
+        var(--bg);}
 
     /* Right-side cinematic image */
     .hero-img{position:absolute;right:0;top:0;bottom:0;width:60%;z-index:1;pointer-events:none;}
     .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%;
-      filter:contrast(1.12) brightness(.65) saturate(.55);}
+      filter:contrast(1.05) brightness(.82) saturate(.65);}
     .hero-img::after{content:'';position:absolute;inset:0;
-      background:linear-gradient(to right,#050a06 0%,rgba(5,10,6,.75) 30%,rgba(5,10,6,.1) 100%),
-                linear-gradient(to top,rgba(5,10,6,.6) 0%,transparent 40%);}
+      background:linear-gradient(to right,var(--bg) 0%,rgba(246,250,247,.85) 32%,rgba(246,250,247,.1) 100%),
+                linear-gradient(to top,rgba(246,250,247,.5) 0%,transparent 40%);}
 
     /* Decorative vertical accent line */
     .hero-line{position:absolute;left:3.5rem;top:0;bottom:0;width:1px;z-index:2;
@@ -88,7 +88,7 @@
     .btn:hover{transform:translateY(-2px);}
     .btn-gold{background:var(--gold);color:#050a06;}
     .btn-gold:hover{background:var(--gold2);box-shadow:0 0 40px rgba(60,158,101,.4);}
-    .btn-o{background:transparent;color:var(--cream);border:1px solid rgba(240,255,245,.25);}
+    .btn-o{background:transparent;color:var(--cream);border:1px solid var(--bd3);}
     .btn-o:hover{border-color:var(--gold);color:var(--gold);}
 
     /* Scroll hint */
@@ -146,16 +146,16 @@
     .gal-item:not(.gal-main) img{height:235px;}
 
     /* ABOUT */
-    #about{padding:9rem 3rem;border-top:1px solid var(--bd);}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+    #about{padding:5rem 3rem;border-top:1px solid var(--bd);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;}
     .about-img-wrap{position:relative;}
-    .about-img{width:100%;border-radius:14px;object-fit:cover;height:520px;display:block;filter:saturate(.65);}
+    .about-img{width:100%;border-radius:14px;object-fit:cover;height:340px;display:block;filter:saturate(.65);}
     .about-badge{position:absolute;bottom:2rem;left:2rem;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border:1px solid var(--gold);border-radius:12px;padding:1.5rem;min-width:180px;}
     .about-badge-n{font-family:'Syne',sans-serif;font-size:2.25rem;font-weight:800;color:var(--gold);line-height:1;}
     .about-badge-l{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m2);margin-top:.3rem;}
-    .about-text .s-h2{margin-bottom:1.75rem;}
-    .about-p{color:var(--m1);font-size:.96rem;line-height:1.9;margin-bottom:1.25rem;}
-    .about-perks{display:flex;flex-direction:column;gap:.875rem;margin-top:2rem;}
+    .about-text .s-h2{margin-bottom:1.25rem;font-size:clamp(1.6rem,3vw,2.4rem);}
+    .about-p{color:var(--m1);font-size:.92rem;line-height:1.8;margin-bottom:.875rem;}
+    .about-perks{display:flex;flex-direction:column;gap:.625rem;margin-top:1.25rem;}
     .perk{display:flex;align-items:flex-start;gap:.875rem;}
     .perk-ic{width:34px;height:34px;border-radius:8px;background:var(--gold3);border:1px solid rgba(60,158,101,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;}
     .perk-text{font-size:.9rem;color:var(--m1);line-height:1.6;padding-top:.35rem;}
@@ -289,6 +289,34 @@
     .d1{transition-delay:.07s!important}.d2{transition-delay:.14s!important}.d3{transition-delay:.21s!important}
     .d4{transition-delay:.28s!important}.d5{transition-delay:.35s!important}.d6{transition-delay:.42s!important}
 
+    /* ADMIN PANEL */
+    #admin-overlay{position:fixed;inset:0;z-index:1001;background:rgba(18,30,22,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .35s;}
+    #admin-overlay.open{opacity:1;pointer-events:all;}
+    .admin-modal{background:var(--bg1);border:1px solid var(--bd2);border-radius:20px;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;position:relative;}
+    .admin-header{padding:2rem 2.25rem 0;display:flex;align-items:flex-start;justify-content:space-between;}
+    .admin-title{font-family:'Nunito',sans-serif;font-size:1.5rem;font-weight:900;}
+    .admin-sub{font-size:.82rem;color:var(--m2);margin-top:.25rem;}
+    .admin-body{padding:1.5rem 2.25rem 2.25rem;}
+    .admin-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;}
+    .admin-cal-nav button{background:none;border:1px solid var(--bd);border-radius:6px;width:32px;height:32px;cursor:pointer;color:var(--m1);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+    .admin-cal-nav button:hover{border-color:var(--gold);color:var(--gold);}
+    .admin-month{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;}
+    .cal-day.has-appt{position:relative;}
+    .cal-day.has-appt::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;background:var(--gold);border-radius:50%;}
+    .cal-day.sel.has-appt::after{background:#fff;}
+    .admin-appt-list{margin-top:1.5rem;display:flex;flex-direction:column;gap:.625rem;min-height:60px;}
+    .admin-day-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m2);margin-bottom:.5rem;}
+    .admin-appt-card{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:.875rem 1.1rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;}
+    .admin-appt-name{font-weight:700;font-size:.88rem;color:var(--cream);}
+    .admin-appt-detail{font-size:.78rem;color:var(--m1);margin-top:.15rem;line-height:1.5;}
+    .admin-appt-time{font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;color:var(--gold);white-space:nowrap;padding-top:.1rem;}
+    .admin-del{background:none;border:none;color:var(--m3);cursor:pointer;font-size:.9rem;padding:.2rem .35rem;border-radius:5px;transition:all .2s;line-height:1;}
+    .admin-del:hover{background:rgba(200,50,50,.08);color:#c83232;}
+    .admin-empty{color:var(--m2);font-size:.84rem;text-align:center;padding:1.75rem 0;}
+    .admin-total{font-size:.7rem;color:var(--m2);text-align:right;margin-top:.875rem;letter-spacing:.05em;}
+    .admin-clear{background:none;border:1px solid var(--bd);border-radius:7px;color:var(--m2);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.4rem .9rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:1rem;width:100%;}
+    .admin-clear:hover{border-color:#c83232;color:#c83232;}
+
     /* TOAST */
     #toast{position:fixed;bottom:2rem;right:2rem;background:var(--gold);color:#0d0b09;padding:.9rem 1.5rem;border-radius:9px;font-weight:700;font-size:.85rem;z-index:9999;transform:translateY(120px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1);box-shadow:0 8px 30px rgba(60,158,101,.35);}
     #toast.on{transform:none;opacity:1;}
@@ -300,8 +328,8 @@
       .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
       .gal-main{grid-row:auto;}
       .gal-main img,.gal-item:not(.gal-main) img{height:260px;}
-      .about-grid{grid-template-columns:1fr;gap:3rem;}
-      .about-img{height:360px;}
+      .about-grid{grid-template-columns:1fr;gap:2rem;}
+      .about-img{height:260px;}
       .hours-grid{grid-template-columns:1fr;}
       .rev-grid{grid-template-columns:1fr;}
     }
@@ -451,6 +479,30 @@
         <div class="book-nav" style="margin-top:1.5rem;"><div></div><button class="btn-next" onclick="closeBook()">Done</button></div>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-overlay" role="dialog" aria-modal="true" aria-label="Appointments">
+  <div class="admin-modal">
+    <div class="admin-header">
+      <div>
+        <div class="admin-title">Appointments</div>
+        <div class="admin-sub">Village Custom Cuts · Booked Online</div>
+      </div>
+      <button class="book-close" onclick="closeAdmin()" aria-label="Close">✕</button>
+    </div>
+    <div class="admin-body">
+      <div class="admin-cal-nav">
+        <button onclick="adminPrev()">‹</button>
+        <span class="admin-month" id="adminMonth"></span>
+        <button onclick="adminNext()">›</button>
+      </div>
+      <div class="cal-grid" id="adminGrid"></div>
+      <div id="adminList"><div class="admin-empty">Select a date to view appointments.</div></div>
+      <div class="admin-total" id="adminTotal"></div>
+      <button class="admin-clear" onclick="clearAllAppts()">Clear All Appointments</button>
     </div>
   </div>
 </div>
@@ -711,6 +763,7 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#barbers">Barbers</a></li>
     <li><a href="#hours">Hours</a></li>
+    <li><a href="#" onclick="openAdmin(event)">Admin</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:1rem;">
     <a href="https://www.instagram.com/villagecustomcuts/" target="_blank" class="f-s" title="Instagram">
@@ -1046,8 +1099,10 @@ function nextMonth(){calDate.setMonth(calDate.getMonth()+1);buildCal();}
 
 function confirmBook(){
   const fn=document.getElementById('inp-fn').value.trim();
+  const ln=document.getElementById('inp-ln').value.trim();
   const phone=document.getElementById('inp-phone').value.trim();
   if(!fn||!phone){alert('Please enter your name and phone number.');return;}
+  const fullName=fn+(ln?' '+ln:'');
   const dateStr=new Date(booking.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
   document.getElementById('confirmDetails').innerHTML=`
     <div class="confirm-row"><span class="confirm-key">Service</span><span class="confirm-val">${booking.svc}</span></div>
@@ -1055,11 +1110,98 @@ function confirmBook(){
     <div class="confirm-row"><span class="confirm-key">Barber</span><span class="confirm-val">${booking.barber}</span></div>
     <div class="confirm-row"><span class="confirm-key">Date</span><span class="confirm-val">${dateStr}</span></div>
     <div class="confirm-row"><span class="confirm-key">Time</span><span class="confirm-val">${booking.time}</span></div>
-    <div class="confirm-row"><span class="confirm-key">Name</span><span class="confirm-val">${fn} ${document.getElementById('inp-ln').value.trim()}</span></div>
+    <div class="confirm-row"><span class="confirm-key">Name</span><span class="confirm-val">${fullName}</span></div>
     <div class="confirm-row"><span class="confirm-key">Phone</span><span class="confirm-val">${phone}</span></div>
   `;
+  /* Save to localStorage */
+  const appts=getAppts();
+  appts.push({svc:booking.svc,price:booking.price,barber:booking.barber,date:booking.date,time:booking.time,name:fullName,phone});
+  saveAppts(appts);
   goStep(5);
   const t=document.getElementById('toast');t.classList.add('on');setTimeout(()=>t.classList.remove('on'),5000);
+}
+
+/* ===== ADMIN CALENDAR ===== */
+const APPTS_KEY='vcc_bookings';
+function getAppts(){try{return JSON.parse(localStorage.getItem(APPTS_KEY)||'[]');}catch{return[];}}
+function saveAppts(arr){localStorage.setItem(APPTS_KEY,JSON.stringify(arr));}
+
+let adminCal=new Date();adminCal.setDate(1);
+let adminSel=null;
+
+function openAdmin(e){if(e)e.preventDefault();document.getElementById('admin-overlay').classList.add('open');document.body.style.overflow='hidden';buildAdminCal();}
+function closeAdmin(){document.getElementById('admin-overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('admin-overlay').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
+
+function buildAdminCal(){
+  const appts=getAppts();
+  const dated=new Set(appts.map(a=>a.date));
+  const today=new Date();today.setHours(0,0,0,0);
+  const y=adminCal.getFullYear(),m=adminCal.getMonth();
+  document.getElementById('adminMonth').textContent=MONTHS[m]+' '+y;
+  const grid=document.getElementById('adminGrid');
+  grid.innerHTML=DAYS.map(d=>`<div class="cal-day-lbl">${d}</div>`).join('');
+  const first=new Date(y,m,1).getDay();
+  for(let i=0;i<first;i++)grid.innerHTML+=`<div></div>`;
+  const dim=new Date(y,m+1,0).getDate();
+  for(let d=1;d<=dim;d++){
+    const iso=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dt=new Date(y,m,d);dt.setHours(0,0,0,0);
+    const isToday=dt.getTime()===today.getTime();
+    const isSel=iso===adminSel;
+    const hasAppt=dated.has(iso);
+    const cls=['cal-day',isToday?'today':'',isSel?'sel':'',hasAppt?'has-appt':''].filter(Boolean).join(' ');
+    grid.innerHTML+=`<div class="${cls}" data-date="${iso}" onclick="adminPickDay(this)">${d}</div>`;
+  }
+  const tot=appts.length;
+  document.getElementById('adminTotal').textContent=tot?`${tot} total appointment${tot>1?'s':''} on record`:'';
+}
+
+function adminPrev(){adminCal.setMonth(adminCal.getMonth()-1);buildAdminCal();}
+function adminNext(){adminCal.setMonth(adminCal.getMonth()+1);buildAdminCal();}
+
+function adminPickDay(el){
+  adminSel=el.dataset.date;
+  buildAdminCal();
+  renderDayAppts(adminSel);
+}
+
+function renderDayAppts(date){
+  const appts=getAppts();
+  const day=appts.filter(a=>a.date===date);
+  const list=document.getElementById('adminList');
+  if(!day.length){list.innerHTML=`<div class="admin-empty">No appointments on this day.</div>`;return;}
+  const label=new Date(date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  list.innerHTML=`<div class="admin-day-label">${label} · ${day.length} appointment${day.length>1?'s':''}</div>`+
+    day.map(a=>{
+      const idx=appts.findIndex(x=>x.date===a.date&&x.time===a.time&&x.name===a.name&&x.phone===a.phone);
+      return`<div class="admin-appt-card">
+        <div>
+          <div class="admin-appt-name">${a.name}</div>
+          <div class="admin-appt-detail">${a.svc} · ${a.barber}<br>${a.phone}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <div class="admin-appt-time">${a.time}</div>
+          <button class="admin-del" onclick="deleteAppt(${idx})" title="Remove">✕</button>
+        </div>
+      </div>`;
+    }).join('');
+}
+
+function deleteAppt(idx){
+  const appts=getAppts();
+  appts.splice(idx,1);
+  saveAppts(appts);
+  buildAdminCal();
+  if(adminSel)renderDayAppts(adminSel);
+}
+
+function clearAllAppts(){
+  if(!confirm('Clear all appointments? This cannot be undone.'))return;
+  saveAppts([]);
+  adminSel=null;
+  buildAdminCal();
+  document.getElementById('adminList').innerHTML=`<div class="admin-empty">Select a date to view appointments.</div>`;
 }
 </script>
 </body>
