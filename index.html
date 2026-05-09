@@ -327,6 +327,12 @@
     .admin-pin-submit{background:var(--gold);color:#fff;border:none;border-radius:7px;padding:.45rem .9rem;font-size:.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:background .2s;}
     .admin-pin-submit:hover{background:var(--gold2);}
     .admin-pin-err{font-size:.72rem;color:#c83232;margin-top:.35rem;}
+    .cal-day.blocked{background:rgba(180,40,40,.07);color:rgba(160,30,30,.45)!important;pointer-events:none;}
+    .admin-block-btn{width:100%;padding:.48rem .75rem;border-radius:7px;border:1px solid var(--bd);background:none;font-family:'DM Sans',sans-serif;font-size:.73rem;font-weight:600;cursor:pointer;color:var(--m1);letter-spacing:.04em;transition:all .2s;margin-bottom:.5rem;text-align:left;}
+    .admin-block-btn:hover{border-color:#c83232;color:#c83232;background:rgba(200,50,50,.04);}
+    .admin-block-btn.is-blocked{border-color:var(--gold);color:var(--gold);background:rgba(42,125,79,.05);}
+    .admin-block-btn.is-blocked:hover{background:rgba(42,125,79,.1);}
+    .admin-blocked-tag{font-size:.71rem;color:rgba(160,30,30,.75);background:rgba(180,40,40,.07);border:1px solid rgba(180,40,40,.14);border-radius:6px;padding:.35rem .65rem;margin-bottom:.5rem;}
 
     /* TOAST */
     #toast{position:fixed;bottom:6rem;right:2rem;background:var(--gold);color:#0d0b09;padding:.9rem 1.5rem;border-radius:9px;font-weight:700;font-size:.85rem;z-index:9999;transform:translateY(120px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1);box-shadow:0 8px 30px rgba(60,158,101,.35);}
@@ -1063,8 +1069,13 @@ const MONTHS=['January','February','March','April','May','June','July','August',
 const DAYS=['Su','Mo','Tu','We','Th','Fr','Sa'];
 const CLOSED_DAYS=[0,1]; // Sunday + Monday
 
+const BLOCKED_KEY='vcc_blocked';
+function getBlocked(){try{return JSON.parse(localStorage.getItem(BLOCKED_KEY)||'[]');}catch{return[];}}
+function saveBlocked(arr){localStorage.setItem(BLOCKED_KEY,JSON.stringify(arr));}
+
 function buildCal(){
   const today=new Date();today.setHours(0,0,0,0);
+  const blocked=new Set(getBlocked());
   const y=calDate.getFullYear(),m=calDate.getMonth();
   document.getElementById('calMonth').textContent=MONTHS[m]+' '+y;
   const grid=document.getElementById('calGrid');
@@ -1077,8 +1088,9 @@ function buildCal(){
     const past=dt<today;
     const closed=CLOSED_DAYS.includes(dt.getDay());
     const isToday=dt.getTime()===today.getTime();
-    const cls=['cal-day',past||closed?'disabled':'',isToday?'today':''].join(' ').trim();
     const iso=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isBlocked=blocked.has(iso);
+    const cls=['cal-day',past||closed||isBlocked?'disabled':'',isBlocked?'blocked':'',isToday?'today':''].filter(Boolean).join(' ');
     grid.innerHTML+=`<div class="${cls}" data-date="${iso}" onclick="selectDate(this)">${d}</div>`;
   }
 }
@@ -1209,6 +1221,7 @@ function closeAdmin(){
 function buildAdminCal(){
   const appts=getAppts();
   const dated=new Set(appts.map(a=>a.date));
+  const blockedSet=new Set(getBlocked());
   const today=new Date();today.setHours(0,0,0,0);
   const y=adminCal.getFullYear(),m=adminCal.getMonth();
   document.getElementById('adminMonth').textContent=MONTHS[m]+' '+y;
@@ -1223,8 +1236,9 @@ function buildAdminCal(){
     const isToday=dt.getTime()===today.getTime();
     const isSel=iso===adminSel;
     const hasAppt=dated.has(iso);
-    const cls=['cal-day',isToday?'today':'',isSel?'sel':'',hasAppt?'has-appt':''].filter(Boolean).join(' ');
-    grid.innerHTML+=`<div class="${cls}" data-date="${iso}" onclick="adminPickDay(this)">${d}</div>`;
+    const isBlocked=blockedSet.has(iso);
+    const cls=['cal-day',isToday?'today':'',isSel?'sel':'',hasAppt?'has-appt':'',isBlocked?'blocked':''].filter(Boolean).join(' ');
+    grid.innerHTML+=`<div class="${cls}" data-date="${iso}" onclick="adminPickDay(this)" style="${isBlocked?'pointer-events:auto;opacity:.45;':''}">${d}</div>`;
   }
   const tot=appts.length;
   document.getElementById('adminTotal').textContent=tot?`${tot} total appointment${tot>1?'s':''} on record`:'';
@@ -1241,12 +1255,21 @@ function adminPickDay(el){
 
 function renderDayAppts(date){
   const appts=getAppts();
+  const isBlocked=getBlocked().includes(date);
   const day=appts.filter(a=>a.date===date);
   const list=document.getElementById('adminList');
-  if(!day.length){list.innerHTML=`<div class="admin-empty">No appointments on this day.</div>`;return;}
   const label=new Date(date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
-  list.innerHTML=`<div class="admin-day-label">${label} · ${day.length} appointment${day.length>1?'s':''}</div>`+
-    day.map(a=>{
+  let html=`<div class="admin-day-label">${label}${day.length?` · ${day.length} appointment${day.length>1?'s':''}`:''}</div>`;
+  if(adminUnlocked){
+    html+=`<button class="admin-block-btn${isBlocked?' is-blocked':''}" onclick="toggleBlockDay('${date}')">
+      ${isBlocked?'✓ Unblock This Day':'🚫 Block Day Off (Take Time Off)'}
+    </button>`;
+  }
+  if(isBlocked) html+=`<div class="admin-blocked-tag">Day off — no new bookings allowed</div>`;
+  if(!day.length){
+    html+=`<div class="admin-empty" style="padding-top:.75rem;">No appointments.</div>`;
+  } else {
+    html+=day.map(a=>{
       const idx=appts.findIndex(x=>x.date===a.date&&x.time===a.time&&x.name===a.name&&x.phone===a.phone);
       return`<div class="admin-appt-card">
         <div>
@@ -1255,10 +1278,21 @@ function renderDayAppts(date){
         </div>
         <div style="display:flex;align-items:center;gap:.5rem;">
           <div class="admin-appt-time">${a.time}</div>
-          <button class="admin-del" onclick="deleteAppt(${idx})" title="Remove">✕</button>
+          ${adminUnlocked?`<button class="admin-del" onclick="deleteAppt(${idx})" title="Remove">✕</button>`:''}
         </div>
       </div>`;
     }).join('');
+  }
+  list.innerHTML=html;
+}
+
+function toggleBlockDay(date){
+  const blocked=getBlocked();
+  const idx=blocked.indexOf(date);
+  if(idx>=0){blocked.splice(idx,1);}else{blocked.push(date);}
+  saveBlocked(blocked);
+  buildAdminCal();
+  renderDayAppts(date);
 }
 
 function deleteAppt(idx){
