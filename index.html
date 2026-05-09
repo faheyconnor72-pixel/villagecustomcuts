@@ -289,36 +289,38 @@
     .d1{transition-delay:.07s!important}.d2{transition-delay:.14s!important}.d3{transition-delay:.21s!important}
     .d4{transition-delay:.28s!important}.d5{transition-delay:.35s!important}.d6{transition-delay:.42s!important}
 
-    /* ADMIN PANEL */
-    #admin-overlay{position:fixed;inset:0;z-index:1001;background:rgba(18,30,22,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .35s;}
-    #admin-overlay.open{opacity:1;pointer-events:all;}
-    .admin-modal{background:var(--bg1);border:1px solid var(--bd2);border-radius:20px;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;position:relative;}
-    .admin-header{padding:2rem 2.25rem 0;display:flex;align-items:flex-start;justify-content:space-between;}
-    .admin-title{font-family:'Nunito',sans-serif;font-size:1.5rem;font-weight:900;}
-    .admin-sub{font-size:.82rem;color:var(--m2);margin-top:.25rem;}
-    .admin-body{padding:1.5rem 2.25rem 2.25rem;}
-    .admin-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;}
-    .admin-cal-nav button{background:none;border:1px solid var(--bd);border-radius:6px;width:32px;height:32px;cursor:pointer;color:var(--m1);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+    /* ADMIN FAB + POPUP */
+    #cal-fab{position:fixed;bottom:1.75rem;right:1.75rem;z-index:1001;display:flex;flex-direction:column;align-items:flex-end;gap:.75rem;}
+    #admin-panel{background:var(--bg1);border:1px solid var(--bd2);border-radius:16px;width:340px;max-height:520px;overflow-y:auto;box-shadow:0 12px 50px rgba(18,30,22,.14),0 2px 8px rgba(18,30,22,.07);transform:translateY(14px) scale(.96);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .22s;transform-origin:bottom right;}
+    #admin-panel.open{transform:none;opacity:1;pointer-events:all;}
+    #cal-fab-btn{width:50px;height:50px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 20px rgba(42,125,79,.38);transition:all .25s;color:#fff;flex-shrink:0;}
+    #cal-fab-btn:hover{background:var(--gold2);transform:scale(1.07);}
+    #cal-fab-btn.active{background:var(--cream);}
+    .admin-header{padding:1.25rem 1.5rem 0;display:flex;align-items:flex-start;justify-content:space-between;}
+    .admin-title{font-family:'Nunito',sans-serif;font-size:1.15rem;font-weight:900;}
+    .admin-sub{font-size:.75rem;color:var(--m2);margin-top:.15rem;}
+    .admin-body{padding:1.1rem 1.5rem 1.5rem;}
+    .admin-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;}
+    .admin-cal-nav button{background:none;border:1px solid var(--bd);border-radius:6px;width:28px;height:28px;cursor:pointer;color:var(--m1);font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:all .2s;}
     .admin-cal-nav button:hover{border-color:var(--gold);color:var(--gold);}
-    .admin-month{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;}
+    .admin-month{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;}
     .cal-day.has-appt{position:relative;}
-    .cal-day.has-appt::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;background:var(--gold);border-radius:50%;}
-    .cal-day.sel.has-appt::after{background:#fff;}
-    .admin-appt-list{margin-top:1.5rem;display:flex;flex-direction:column;gap:.625rem;min-height:60px;}
-    .admin-day-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m2);margin-bottom:.5rem;}
-    .admin-appt-card{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:.875rem 1.1rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;}
-    .admin-appt-name{font-weight:700;font-size:.88rem;color:var(--cream);}
-    .admin-appt-detail{font-size:.78rem;color:var(--m1);margin-top:.15rem;line-height:1.5;}
-    .admin-appt-time{font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;color:var(--gold);white-space:nowrap;padding-top:.1rem;}
-    .admin-del{background:none;border:none;color:var(--m3);cursor:pointer;font-size:.9rem;padding:.2rem .35rem;border-radius:5px;transition:all .2s;line-height:1;}
+    .cal-day.has-appt::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:var(--gold);border-radius:50%;}
+    .cal-day.sel.has-appt::after{background:rgba(255,255,255,.8);}
+    .admin-day-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m2);margin-bottom:.5rem;margin-top:1rem;}
+    .admin-appt-card{background:var(--bg2);border:1px solid var(--bd);border-radius:9px;padding:.75rem 1rem;display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;margin-bottom:.5rem;}
+    .admin-appt-name{font-weight:700;font-size:.84rem;color:var(--cream);}
+    .admin-appt-detail{font-size:.74rem;color:var(--m1);margin-top:.1rem;line-height:1.5;}
+    .admin-appt-time{font-family:'Syne',sans-serif;font-weight:800;font-size:.8rem;color:var(--gold);white-space:nowrap;}
+    .admin-del{background:none;border:none;color:var(--m3);cursor:pointer;font-size:.82rem;padding:.2rem .3rem;border-radius:4px;transition:all .2s;line-height:1;}
     .admin-del:hover{background:rgba(200,50,50,.08);color:#c83232;}
-    .admin-empty{color:var(--m2);font-size:.84rem;text-align:center;padding:1.75rem 0;}
-    .admin-total{font-size:.7rem;color:var(--m2);text-align:right;margin-top:.875rem;letter-spacing:.05em;}
-    .admin-clear{background:none;border:1px solid var(--bd);border-radius:7px;color:var(--m2);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.4rem .9rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:1rem;width:100%;}
+    .admin-empty{color:var(--m2);font-size:.82rem;text-align:center;padding:1.5rem 0;}
+    .admin-total{font-size:.67rem;color:var(--m2);text-align:right;margin-top:.75rem;letter-spacing:.05em;}
+    .admin-clear{background:none;border:1px solid var(--bd);border-radius:7px;color:var(--m2);font-size:.67rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.35rem .8rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:.875rem;width:100%;}
     .admin-clear:hover{border-color:#c83232;color:#c83232;}
 
     /* TOAST */
-    #toast{position:fixed;bottom:2rem;right:2rem;background:var(--gold);color:#0d0b09;padding:.9rem 1.5rem;border-radius:9px;font-weight:700;font-size:.85rem;z-index:9999;transform:translateY(120px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1);box-shadow:0 8px 30px rgba(60,158,101,.35);}
+    #toast{position:fixed;bottom:6rem;right:2rem;background:var(--gold);color:#0d0b09;padding:.9rem 1.5rem;border-radius:9px;font-weight:700;font-size:.85rem;z-index:9999;transform:translateY(120px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1);box-shadow:0 8px 30px rgba(60,158,101,.35);}
     #toast.on{transform:none;opacity:1;}
 
     /* RESPONSIVE */
@@ -483,15 +485,15 @@
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
-<div id="admin-overlay" role="dialog" aria-modal="true" aria-label="Appointments">
-  <div class="admin-modal">
+<!-- ADMIN FAB -->
+<div id="cal-fab">
+  <div id="admin-panel" role="dialog" aria-label="Appointments">
     <div class="admin-header">
       <div>
         <div class="admin-title">Appointments</div>
-        <div class="admin-sub">Village Custom Cuts · Booked Online</div>
+        <div class="admin-sub">Village Custom Cuts</div>
       </div>
-      <button class="book-close" onclick="closeAdmin()" aria-label="Close">✕</button>
+      <button class="book-close" onclick="closeAdmin()" aria-label="Close" style="width:30px;height:30px;font-size:.9rem;">✕</button>
     </div>
     <div class="admin-body">
       <div class="admin-cal-nav">
@@ -505,6 +507,7 @@
       <button class="admin-clear" onclick="clearAllAppts()">Clear All Appointments</button>
     </div>
   </div>
+  <button id="cal-fab-btn" onclick="toggleAdmin()" title="View Appointments">📅</button>
 </div>
 
 <!-- NAV -->
@@ -763,7 +766,6 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#barbers">Barbers</a></li>
     <li><a href="#hours">Hours</a></li>
-    <li><a href="#" onclick="openAdmin(event)">Admin</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:1rem;">
     <a href="https://www.instagram.com/villagecustomcuts/" target="_blank" class="f-s" title="Instagram">
@@ -1069,7 +1071,6 @@ function buildCal(){
   }
 }
 
-const UNAVAIL_SLOTS=['9:30 AM','11:00 AM','2:00 PM','4:30 PM'];
 const ALL_SLOTS=['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM'];
 
 function selectDate(el){
@@ -1080,8 +1081,9 @@ function selectDate(el){
   document.getElementById('btn-3').disabled=true;
   const tg=document.getElementById('timeGrid');
   document.getElementById('timeLabel').textContent='Available Times';
+  const bookedTimes=new Set(getAppts().filter(a=>a.date===booking.date).map(a=>a.time));
   tg.innerHTML=ALL_SLOTS.map(s=>{
-    const unavail=UNAVAIL_SLOTS.includes(s)?'unavailable':'';
+    const unavail=bookedTimes.has(s)?'unavailable':'';
     return`<div class="time-slot ${unavail}" onclick="selectTime(this)">${s}</div>`;
   }).join('');
 }
@@ -1129,9 +1131,17 @@ function saveAppts(arr){localStorage.setItem(APPTS_KEY,JSON.stringify(arr));}
 let adminCal=new Date();adminCal.setDate(1);
 let adminSel=null;
 
-function openAdmin(e){if(e)e.preventDefault();document.getElementById('admin-overlay').classList.add('open');document.body.style.overflow='hidden';buildAdminCal();}
-function closeAdmin(){document.getElementById('admin-overlay').classList.remove('open');document.body.style.overflow='';}
-document.getElementById('admin-overlay').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
+function toggleAdmin(){
+  const panel=document.getElementById('admin-panel');
+  const btn=document.getElementById('cal-fab-btn');
+  const isOpen=panel.classList.contains('open');
+  if(isOpen){closeAdmin();}else{panel.classList.add('open');btn.classList.add('active');btn.textContent='✕';buildAdminCal();}
+}
+function closeAdmin(){
+  document.getElementById('admin-panel').classList.remove('open');
+  const btn=document.getElementById('cal-fab-btn');
+  btn.classList.remove('active');btn.textContent='📅';
+}
 
 function buildAdminCal(){
   const appts=getAppts();
