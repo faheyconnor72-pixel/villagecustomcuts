@@ -1199,8 +1199,7 @@ function renderDayAppts(date){
       const idx=appts.findIndex(x=>x.date===a.date&&x.time===a.time&&x.name===a.name&&x.phone===a.phone);
       return`<div class="admin-appt-card">
         <div>
-          <div class="admin-appt-name">${a.name}</div>
-          <div class="admin-appt-detail">${a.svc} · ${a.barber}<br>${a.phone}</div>
+          <div class="admin-appt-detail">${a.svc} · ${a.barber}</div>
         </div>
         <div style="display:flex;align-items:center;gap:.5rem;">
           <div class="admin-appt-time">${a.time}</div>
