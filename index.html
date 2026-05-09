@@ -28,21 +28,17 @@
     #prog{position:fixed;top:0;left:0;height:2px;background:var(--gold);z-index:9999;width:0%;transition:width .1s;}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:72px;transition:all .5s;}
-    nav.s{background:rgba(255,255,255,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);}
-    .n-logo{font-family:'Nunito',sans-serif;font-size:1.2rem;font-weight:700;text-decoration:none;color:#fff;letter-spacing:.02em;transition:color .4s;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:72px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .5s;}
+    nav.s{border-bottom-color:var(--bd);}
+    .n-logo{font-family:'Nunito',sans-serif;font-size:1.2rem;font-weight:700;text-decoration:none;color:var(--cream);letter-spacing:.02em;}
     .n-logo span{color:var(--gold);}
-    nav.s .n-logo{color:var(--cream);}
     .n-links{display:flex;align-items:center;gap:2.5rem;list-style:none;}
-    .n-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
-    nav.s .n-links a{color:var(--m1);}
-    .n-links a:hover{color:#fff;}
-    nav.s .n-links a:hover{color:var(--cream);}
+    .n-links a{color:var(--m1);text-decoration:none;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
+    .n-links a:hover{color:var(--cream);}
     .n-book{background:var(--gold)!important;color:#0d0b09!important;padding:.48rem 1.35rem;border-radius:6px;font-weight:700!important;transition:background .2s,transform .2s!important;}
     .n-book:hover{background:var(--gold2)!important;transform:translateY(-1px);}
     .n-tog{display:none;background:none;border:1px solid var(--bd);border-radius:6px;cursor:pointer;padding:.42rem .55rem;flex-direction:column;gap:5px;}
-    .n-tog span{display:block;width:19px;height:1px;background:#fff;border-radius:1px;transition:.3s;}
-    nav.s .n-tog span{background:var(--cream);}
+    .n-tog span{display:block;width:19px;height:1px;background:var(--cream);border-radius:1px;transition:.3s;}
 
     /* HERO — CINEMATIC */
     #hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--bg);}
