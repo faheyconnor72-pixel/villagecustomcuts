@@ -321,6 +321,12 @@
     .admin-total{font-size:.67rem;color:var(--m2);text-align:right;margin-top:.75rem;letter-spacing:.05em;}
     .admin-clear{background:none;border:1px solid var(--bd);border-radius:7px;color:var(--m2);font-size:.67rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.35rem .8rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:.875rem;width:100%;}
     .admin-clear:hover{border-color:#c83232;color:#c83232;}
+    .admin-pin-row{display:flex;gap:.5rem;align-items:center;}
+    .admin-pin-input{flex:1;border:1px solid var(--bd);border-radius:7px;padding:.45rem .75rem;font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none;color:var(--cream);background:var(--bg2);transition:border-color .2s;}
+    .admin-pin-input:focus{border-color:var(--gold);}
+    .admin-pin-submit{background:var(--gold);color:#fff;border:none;border-radius:7px;padding:.45rem .9rem;font-size:.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:background .2s;}
+    .admin-pin-submit:hover{background:var(--gold2);}
+    .admin-pin-err{font-size:.72rem;color:#c83232;margin-top:.35rem;}
 
     /* TOAST */
     #toast{position:fixed;bottom:6rem;right:2rem;background:var(--gold);color:#0d0b09;padding:.9rem 1.5rem;border-radius:9px;font-weight:700;font-size:.85rem;z-index:9999;transform:translateY(120px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1);box-shadow:0 8px 30px rgba(60,158,101,.35);}
@@ -465,7 +471,6 @@
           <div class="form-group"><label>Last Name</label><input type="text" id="inp-ln" placeholder="Smith" /></div>
         </div>
         <div class="form-group"><label>Phone Number</label><input type="tel" id="inp-phone" placeholder="(914) 555-0100" /></div>
-        <div class="form-group"><label>Email (optional)</label><input type="email" id="inp-email" placeholder="john@email.com" /></div>
         <div class="form-group"><label>Notes (optional)</label><textarea id="inp-notes" placeholder="Any preferences or requests..." style="resize:vertical;min-height:80px;"></textarea></div>
         <div class="book-nav">
           <button class="btn-back" onclick="goStep(3)">← Back</button>
@@ -496,8 +501,12 @@
         <div class="admin-title">Appointments</div>
         <div class="admin-sub">Village Custom Cuts</div>
       </div>
-      <button class="book-close" onclick="closeAdmin()" aria-label="Close" style="width:30px;height:30px;font-size:.9rem;">✕</button>
+      <div style="display:flex;align-items:center;gap:.5rem;">
+        <button id="admin-lock-btn" onclick="toggleAdminLock()" title="Owner access" style="background:none;border:1px solid var(--bd);border-radius:7px;width:30px;height:30px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--m2);">🔒</button>
+        <button class="book-close" onclick="closeAdmin()" aria-label="Close" style="width:30px;height:30px;font-size:.9rem;">✕</button>
+      </div>
     </div>
+    <div id="admin-pin-wrap" style="display:none;padding:.75rem 1.5rem 0;"></div>
     <div class="admin-body">
       <div class="admin-cal-nav">
         <button onclick="adminPrev()">‹</button>
@@ -1128,11 +1137,48 @@ function confirmBook(){
 
 /* ===== ADMIN CALENDAR ===== */
 const APPTS_KEY='vcc_bookings';
+const ADMIN_PIN='1482'; // change this to your preferred PIN
 function getAppts(){try{return JSON.parse(localStorage.getItem(APPTS_KEY)||'[]');}catch{return[];}}
 function saveAppts(arr){localStorage.setItem(APPTS_KEY,JSON.stringify(arr));}
 
 let adminCal=new Date();adminCal.setDate(1);
 let adminSel=null;
+let adminUnlocked=false;
+
+function toggleAdminLock(){
+  const wrap=document.getElementById('admin-pin-wrap');
+  const btn=document.getElementById('admin-lock-btn');
+  if(adminUnlocked){
+    adminUnlocked=false;
+    btn.textContent='🔒';btn.style.borderColor='';btn.style.color='';
+    wrap.style.display='none';wrap.innerHTML='';
+    if(adminSel)renderDayAppts(adminSel);
+    return;
+  }
+  if(wrap.style.display==='block'){wrap.style.display='none';wrap.innerHTML='';return;}
+  wrap.style.display='block';
+  wrap.innerHTML=`<div class="admin-pin-row">
+    <input class="admin-pin-input" type="password" id="adminPinInput" placeholder="Enter PIN" maxlength="10" onkeydown="if(event.key==='Enter')submitAdminPin()" />
+    <button class="admin-pin-submit" onclick="submitAdminPin()">Unlock</button>
+  </div><div class="admin-pin-err" id="adminPinErr"></div>`;
+  document.getElementById('adminPinInput').focus();
+}
+
+function submitAdminPin(){
+  const val=document.getElementById('adminPinInput').value;
+  if(val===ADMIN_PIN){
+    adminUnlocked=true;
+    const wrap=document.getElementById('admin-pin-wrap');
+    wrap.style.display='none';wrap.innerHTML='';
+    const btn=document.getElementById('admin-lock-btn');
+    btn.textContent='🔓';btn.style.borderColor='var(--gold)';btn.style.color='var(--gold)';
+    if(adminSel)renderDayAppts(adminSel);
+  } else {
+    document.getElementById('adminPinErr').textContent='Incorrect PIN.';
+    document.getElementById('adminPinInput').value='';
+    document.getElementById('adminPinInput').focus();
+  }
+}
 
 function toggleAdmin(){
   const panel=document.getElementById('admin-panel');
@@ -1144,6 +1190,11 @@ function closeAdmin(){
   document.getElementById('admin-panel').classList.remove('open');
   const btn=document.getElementById('cal-fab-btn');
   btn.classList.remove('active');btn.textContent='📅';
+  adminUnlocked=false;
+  const lbtn=document.getElementById('admin-lock-btn');
+  if(lbtn){lbtn.textContent='🔒';lbtn.style.borderColor='';lbtn.style.color='';}
+  const wrap=document.getElementById('admin-pin-wrap');
+  if(wrap){wrap.style.display='none';wrap.innerHTML='';}
 }
 (function(){
   const btn=document.getElementById('cal-fab-btn');
@@ -1199,7 +1250,8 @@ function renderDayAppts(date){
       const idx=appts.findIndex(x=>x.date===a.date&&x.time===a.time&&x.name===a.name&&x.phone===a.phone);
       return`<div class="admin-appt-card">
         <div>
-          <div class="admin-appt-detail">${a.svc} · ${a.barber}</div>
+          ${adminUnlocked?`<div class="admin-appt-name">${a.name}</div>`:''}
+          <div class="admin-appt-detail">${a.svc} · ${a.barber}${adminUnlocked?`<br>${a.phone}`:''}</div>
         </div>
         <div style="display:flex;align-items:center;gap:.5rem;">
           <div class="admin-appt-time">${a.time}</div>
