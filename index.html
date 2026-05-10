@@ -44,30 +44,19 @@
     /* HERO — CINEMATIC */
     #hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--bg);}
 
-    /* Hero background: pattern + gradient veil */
-    .hero-bg{position:absolute;inset:0;z-index:0;
-      background:url('barber-pattern.webp') repeat,var(--bg);
-      background-size:560px auto;
-      opacity:.22;
-      animation:hero-drift 50s linear infinite;}
-    @keyframes hero-drift{0%{background-position:0 0}100%{background-position:560px 280px}}
+    /* Hero background: hidden — body::before pattern shows through */
+    .hero-bg{display:none;}
+    .hero-glow{display:none;}
 
-    /* slow green pulse overlay */
-    .hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none;
-      background:radial-gradient(ellipse at 72% 50%,rgba(42,125,79,.09),transparent 58%);
-      animation:hero-glow-pulse 8s ease-in-out infinite;}
-    @keyframes hero-glow-pulse{0%,100%{opacity:.55;transform:scale(1);}50%{opacity:1;transform:scale(1.12);}}
-
-    /* Gradient overlay so text stays readable */
-    .hero-veil{position:absolute;inset:0;z-index:2;
+    /* subtle left veil keeps text readable over body pattern */
+    .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
       background:
-        linear-gradient(to right,rgba(255,255,255,.96) 0%,rgba(255,255,255,.82) 42%,rgba(255,255,255,.22) 100%),
-        linear-gradient(to top,rgba(255,255,255,.55) 0%,transparent 38%),
-        linear-gradient(to bottom,transparent 55%,rgba(42,125,79,.07) 100%);}
+        linear-gradient(to right,rgba(255,255,255,.88) 0%,rgba(255,255,255,.6) 50%,transparent 100%),
+        linear-gradient(to bottom,transparent 60%,rgba(255,255,255,.5) 100%);}
 
-    /* seamless bottom fade into body */
-    .hero-fade{position:absolute;bottom:0;left:0;right:0;height:140px;z-index:3;pointer-events:none;
-      background:linear-gradient(to bottom,transparent,rgba(255,255,255,.98));}
+    /* seamless bottom fade into next section */
+    .hero-fade{position:absolute;bottom:0;left:0;right:0;height:100px;z-index:2;pointer-events:none;
+      background:linear-gradient(to bottom,transparent,rgba(255,255,255,.9));}
 
     /* Right-side image removed */
     .hero-img{display:none;}
@@ -77,7 +66,7 @@
       background:linear-gradient(to bottom,transparent 5%,rgba(60,158,101,.5) 30%,rgba(60,158,101,.5) 70%,transparent 95%);}
 
     /* Particles */
-    .hero-particles{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+    .hero-particles{display:none;}
     .ptcl{position:absolute;border-radius:50%;background:rgba(60,158,101,.75);
       animation:ptcl-rise linear infinite;}
     @keyframes ptcl-rise{
