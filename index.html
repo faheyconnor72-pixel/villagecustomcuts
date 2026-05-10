@@ -124,7 +124,7 @@
     .svc-card-img{aspect-ratio:3/2;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:3rem;border-bottom:1px solid var(--bd);transition:background .25s;}
     .svc-card:hover .svc-card-img{background:var(--bg2);}
     .svc-card-body{padding:1.5rem 1.75rem 1.75rem;display:flex;flex-direction:column;flex:1;}
-    .svc-card-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:.5rem;letter-spacing:-.01em;}
+    .svc-card-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;margin-bottom:.5rem;letter-spacing:.02em;font-style:italic;}
     .svc-card-desc{color:var(--m1);font-size:.84rem;line-height:1.7;flex:1;margin-bottom:1.25rem;}
     .svc-card-foot{display:flex;align-items:center;justify-content:space-between;}
     .svc-price{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;color:var(--gold);}
@@ -719,11 +719,15 @@
       </div>
       <div class="hours-contact rv d3">
         <a href="tel:+19148620245" class="contact-card" style="text-decoration:none;color:inherit;">
-          <div class="contact-ic">📞</div>
+          <div class="contact-ic" style="background:var(--gold);border-color:var(--gold);color:#fff;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.27 12 19.79 19.79 0 0 1 1.15 3.38 2 2 0 0 1 3.12 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16l.92.92z"/></svg>
+          </div>
           <div><div class="contact-label">Phone</div><div class="contact-val">(914) 862-0245</div><div class="contact-sub">Call to book or ask questions</div></div>
         </a>
         <div class="contact-card">
-          <div class="contact-ic">📍</div>
+          <div class="contact-ic" style="background:var(--gold);border-color:var(--gold);color:#fff;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
           <div><div class="contact-label">Address</div><div class="contact-val">6 Maple St</div><div class="contact-sub">Croton-on-Hudson, NY 10520</div></div>
         </div>
         <a href="https://www.instagram.com/villagecustomcuts/" target="_blank" class="contact-card ig-card" style="text-decoration:none;color:inherit;">
@@ -738,7 +742,9 @@
           </div>
         </a>
         <div class="contact-card" style="cursor:pointer;" onclick="openBook(event)">
-          <div class="contact-ic">📅</div>
+          <div class="contact-ic" style="background:var(--gold);border-color:var(--gold);color:#fff;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
           <div><div class="contact-label">Online Booking</div><div class="contact-val">Book Your Spot</div><div class="contact-sub">Choose your barber, date &amp; time</div></div>
         </div>
       </div>
